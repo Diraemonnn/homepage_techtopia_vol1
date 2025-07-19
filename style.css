@@ -1,6 +1,3 @@
-/* ==========================================================================
-   1. Reset & Base Styles
-   ========================================================================== */
 :root {
   --font-pixel: 'Press Start 2P', monospace;
   --color-primary: #4169e1; /* Royal Blue */
@@ -67,11 +64,11 @@ img {
 }
 
 .header {
-    position: fixed;
-    width: 100%;
+  position: fixed;
+  width: 100%;
     z-index: 1000;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .nav-wrapper {
@@ -81,8 +78,12 @@ img {
   height: 60px;
 }
 
+.hamburger {
+  margin-left: auto;
+}
+
 .logo-img {
-  height: 28px;
+  height: 45px;
   width: auto;
   transition: transform 0.3s ease;
 }
@@ -176,9 +177,11 @@ img {
 }
 
 .footer-social {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+  margin-top: 0.5rem;
 }
 
 .social-link {
@@ -214,8 +217,8 @@ img {
 
 .footer-links a {
     color: #6c757d;
-    text-decoration: none;
-    transition: all 0.3s ease;
+  text-decoration: none;
+  transition: all 0.3s ease;
     display: inline-block;
     font-size: 0.9rem;
 }
@@ -543,7 +546,7 @@ section:not(:last-of-type) {
       0 0 32px #ffd700,
       4px 4px 0px #000;
   }
-  100% { 
+  100% {
     text-shadow: 
       0 0 24px #ffd700,
       0 0 48px #ffd700,
@@ -562,7 +565,7 @@ section:not(:last-of-type) {
   margin: 0 auto;
   max-width: 600px;
   text-shadow: 2px 2px 0px rgba(30, 58, 138, 0.6);
-  opacity: 0.9;
+    opacity: 0.9;
 }
 
 /* ==========================================================================
@@ -573,7 +576,7 @@ section:not(:last-of-type) {
     linear-gradient(180deg, #1e3a8a 0%, #3b82f6 50%, #1e40af 100%);
   position: relative;
   overflow: hidden;
-  padding: 6rem 0;
+  padding: 10rem 0;
 }
 
 .objectives .container {
@@ -612,7 +615,7 @@ section:not(:last-of-type) {
   transition: all 0.3s ease-out;
   position: relative;
   overflow: hidden;
-  margin: 0;
+  margin: 10rem;
   box-shadow: var(--shadow-pixel);
   border-radius: 0;
   image-rendering: pixelated;
@@ -665,7 +668,7 @@ section:not(:last-of-type) {
   .objectives-grid {
     grid-template-columns: 1fr;
     gap: 2.5rem;
-    padding: 0 1rem;
+  padding: 0 1rem;
   }
   
   .objective-card {
@@ -1174,24 +1177,17 @@ section:not(:last-of-type) {
 }
 
 .faq-answer {
-  background: 
-    linear-gradient(145deg, #2d1b69, #1e1b4b),
-    repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 8px,
-      rgba(255,255,255,0.02) 8px,
-      rgba(255,255,255,0.02) 16px
-    );
-  padding: 0 2rem;
+  display: block;
   max-height: 0;
+  opacity: 0;
   overflow: hidden;
-  transition: all 0.5s ease-out;
-  border-top: 1px solid rgba(255,255,255,0.1);
+  padding: 0 2rem;
+  transition: max-height 0.6s cubic-bezier(0.4,0,0.2,1), opacity 0.5s, padding 0.5s;
 }
 
 .faq-item.active .faq-answer {
-  max-height: 400px;
+  max-height: 500px;
+  opacity: 1;
   padding: 2rem;
 }
 
@@ -1256,9 +1252,10 @@ section:not(:last-of-type) {
 
 .footer-social {
   display: flex;
-  gap: 0.5rem;
-  margin-bottom: 0.2rem;
   justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+  margin-top: 0.5rem;
 }
 
 .footer-social .social-link {
@@ -1804,7 +1801,7 @@ section:not(:last-of-type) {
   color: #1E3A8A;
   width: 40px;
   height: 40px;
-  display: flex;
+    display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.2rem;
@@ -1843,9 +1840,9 @@ section:not(:last-of-type) {
 
 .footer-links a::after {
   content: "";
-  position: absolute;
+    position: absolute;
   bottom: 0;
-  left: 0;
+    left: 0;
   width: 0;
   height: 2px;
   background: linear-gradient(90deg, #FFD700, #FFA500);
@@ -1854,7 +1851,7 @@ section:not(:last-of-type) {
 }
 
 .footer-links a:hover::after {
-  width: 100%;
+    width: 100%;
 }
 
 .contact-info a {
@@ -1936,7 +1933,7 @@ section:not(:last-of-type) {
   position: absolute;
   top: 0;
   left: -100%;
-  width: 100%;
+    width: 100%;
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
   transition: left 0.5s ease;
@@ -2000,7 +1997,7 @@ section:not(:last-of-type) {
   }
   
   .logo-img {
-    height: 25px;
+    height: 50px;
   }
   
   .nav-list {
@@ -2025,16 +2022,16 @@ section:not(:last-of-type) {
   .hero-title {
     font-size: clamp(1.8rem, 8vw, 2.5rem);
   }
-  
+
   .hero-theme {
     font-size: clamp(1rem, 4vw, 1.3rem);
   }
-  
+
   .hero-description {
     font-size: clamp(0.8rem, 3.5vw, 1rem);
     padding: 1.5rem;
   }
-  
+
   .mascot-img {
     width: 150px;
   }
@@ -2137,11 +2134,11 @@ section:not(:last-of-type) {
   }
   
   /* FAQ Mobile */
-  .faq {
+.faq {
     padding: 3rem 0;
-  }
-  
-  .faq-container {
+}
+
+.faq-container {
     padding: 0 1rem;
   }
   
@@ -2162,8 +2159,8 @@ section:not(:last-of-type) {
   
   .faq-answer {
     padding: 0 1.5rem;
-  }
-  
+}
+
   .faq-item.active .faq-answer {
     padding: 1.5rem;
   }
@@ -2229,9 +2226,9 @@ section:not(:last-of-type) {
   .hero-content {
     text-align: center;
     max-width: 100%;
-  }
-  
-  .mascot-img {
+    }
+    
+    .mascot-img {
     width: 400px;
   }
   
@@ -2350,4 +2347,154 @@ section:not(:last-of-type) {
   .footer-social .social-link {
     font-size: 2rem;
   }
+}
+
+/* Hamburger menu styles */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
+}
+.hamburger span {
+  display: block;
+  width: 28px;
+  height: 5px;
+  margin: 4px 0;
+  background: #222;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+  nav .nav-list {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: #fff;
+    width: 100vw;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px 0 20px 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    z-index: 1000;
+    border-bottom: 4px solid #ffd700;
+  }
+  nav .nav-list.active {
+    display: flex;
+  }
+}
+@media (min-width: 769px) {
+  .hamburger {
+    display: none;
+  }
+  nav .nav-list {
+    display: flex !important;
+    position: static;
+    flex-direction: row;
+    background: none;
+    width: auto;
+    padding: 0;
+    box-shadow: none;
+    border: none;
+  }
+}
+
+/* Objectives grid: 4 columns on desktop, 1 on mobile, padding match .container */
+.objectives-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3.5rem;
+  margin-top: 4rem;
+  padding: 0 20px;
+}
+@media (max-width: 1100px) {
+  .objectives-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 20px;
+  }
+}
+@media (max-width: 768px) {
+  .objectives-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding: 0 1rem;
+    }
+}
+
+@media (max-width: 600px) {
+  .registration-wave {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    text-align: left;
+    word-break: break-word;
+    padding: 0.7rem;
+  }
+  .wave-label, .wave-date, .wave-price {
+    font-size: 0.95em;
+    display: block;
+    text-align: left;
+    margin-bottom: 0.2em;
+    white-space: normal;
+  }
+  .wave-price {
+    margin-top: 0.2em;
+    float: none;
+    word-break: break-word;
+    font-size: 1em;
+  }
+  .footer-logos {
+    gap: 0.5rem !important;
+  }
+  .footer-logo img {
+    max-width: 60px;
+    height: auto;
+  }
+}
+
+.objective-icon {
+  display: block;
+  margin: 0 auto 2rem auto;
+  width: 120px;
+  height: 120px;
+  image-rendering: pixelated;
+  filter: drop-shadow(2px 2px 0 #000);
+}
+
+@media (max-width: 768px) {
+  .objective-icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1.2rem;
+  }
+}
+
+.footer-main, .footer-links, .footer-bottom {
+  padding-left: 1.2rem;
+  padding-right: 1.2rem;
+}
+
+.faq-answer {
+  display: block;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0 2rem;
+  transition: max-height 0.6s cubic-bezier(0.4,0,0.2,1), opacity 0.5s, padding 0.5s;
+}
+.faq-item.active .faq-answer {
+  max-height: 500px;
+  opacity: 1;
+  padding: 2rem;
 }
