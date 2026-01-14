@@ -8,11 +8,13 @@
 
       <div class="competitions-grid">
         <div 
-          v-for="competition in competitions" 
+          v-for="(competition, index) in competitionsWithIcons" 
           :key="competition.id"
           class="competition-card card"
         >
-          <div class="competition-header" :style="{ backgroundColor: competition.color }">
+          <div class="competition-icon" v-html="competition.icon"></div>
+          
+          <div class="competition-header">
             <h3 class="competition-title">{{ competition.title }}</h3>
           </div>
 
@@ -57,115 +59,220 @@ const formatDateRange = (start, end) => {
   const endDate = new Date(end).toLocaleDateString('id-ID', options);
   return `${startDate} – ${endDate}`;
 };
+
+// Add category icons
+const competitionsWithIcons = competitions.map((comp) => {
+  const iconMap = {
+    'Web Design': `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-4h11v4zm0-5H4V9h11v4zm5 5h-4V9h4v9z"/></svg>`,
+    'Cisco Packet Tracer': `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>`,
+    'Poster Digital': `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14zM5 10h5v7H5zm6-3h8v3h-8zm0 4h8v6h-8z"/></svg>`,
+    'Video Kreatif': `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>`
+  };
+  return {
+    ...comp,
+    icon: iconMap[comp.title] || iconMap['Web Design']
+  };
+});
 </script>
 
 <style scoped>
 .competitions {
-  background: linear-gradient(135deg, #FF006E 0%, #C70055 100%);
-  color: var(--color-pure-white);
+  position: relative;
 }
 
-.section-title {
-  color: var(--color-neon-yellow);
-}
-
-.section-subtitle {
-  color: var(--color-pure-white);
-  opacity: 0.9;
-}
-
-.competitions-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: var(--space-8);
-  max-width: 100%;
+.section-header {
+  text-align: center;
+  margin-bottom: 48px;
   width: 100%;
 }
 
+.section-subtitle {
+  color: var(--color-grey-400);
+  text-align: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Horizontal Scrolling Layout */
+.competitions-grid {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  padding: 10px 4px 40px 4px; /* Bottom padding for scrollbar/shadow */
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
+  /* Hide scrollbar but keep functionality */
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary) rgba(255, 255, 255, 0.05);
+}
+
+.competitions-grid::-webkit-scrollbar {
+  height: 6px;
+}
+
+.competitions-grid::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.competitions-grid::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 10px;
+}
+
 .competition-card {
-  background: var(--color-pure-white);
-  color: var(--color-pure-black);
+  min-width: 350px;
+  max-width: 350px;
+  flex-shrink: 0;
+  scroll-snap-align: center;
+  
+  /* Restored Base Styles */
   padding: 0;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  min-height: 480px;
+  min-height: 580px;
+  position: relative;
+  background: rgba(13, 18, 30, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px; /* Added proper radius */
+  transition: all 0.3s ease;
+}
+
+.competition-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--color-primary);
+  box-shadow: 0 20px 40px -10px rgba(0, 217, 255, 0.15);
+}
+
+/* Ensure container handles overflow correctly */
+.container {
+  overflow: visible; /* Let scrollbar be visible/usable */
+}
+
+
+.competition-icon {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 217, 255, 0.1);
+  border: 1px solid rgba(0, 217, 255, 0.2);
+  border-radius: 12px;
+  color: var(--color-primary);
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(4px);
+}
+
+.competition-icon svg {
+  width: 28px;
+  height: 28px;
 }
 
 .competition-header {
-  padding: var(--space-6);
-  border-bottom: var(--border-width-medium) solid var(--color-pure-black);
+  padding: 32px 24px;
+  background: linear-gradient(135deg, rgba(0, 217, 255, 0.1) 0%, rgba(123, 47, 255, 0.1) 100%);
+  position: relative;
+  z-index: 1;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .competition-title {
-  font-size: var(--text-3xl);
-  font-weight: var(--weight-black);
+  font-size: 1.5rem;
+  font-weight: 800;
   color: var(--color-pure-white);
   text-transform: uppercase;
-  text-align: center;
+  text-align: left;
   margin: 0;
+  font-family: var(--font-display);
+  letter-spacing: 0.05em;
+  padding-right: 60px; /* Space for icon */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .competition-body {
-  padding: var(--space-6);
+  padding: 32px 24px;
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
+  gap: 24px;
   flex: 1;
 }
 
 .competition-description {
-  font-size: var(--text-lg);
+  font-size: 0.95rem;
   line-height: 1.6;
-  text-align: center;
+  text-align: left;
+  color: var(--color-grey-300);
 }
 
 .waves-info {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: 12px;
+  margin-top: auto;
 }
 
 .wave-item {
-  padding: var(--space-4);
-  background: rgba(0, 0, 0, 0.05);
-  border: var(--border-width-thin) solid var(--color-pure-black);
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.wave-item:hover {
+  border-color: rgba(0, 217, 255, 0.3);
+  background: rgba(0, 217, 255, 0.05);
+  transform: translateX(4px);
 }
 
 .wave-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: var(--space-2);
+  margin-bottom: 4px;
 }
 
 .wave-label {
-  font-size: var(--text-lg);
-  font-weight: var(--weight-black);
+  font-size: 0.85rem;
+  font-weight: 600;
   text-transform: uppercase;
+  color: var(--color-grey-400);
+  letter-spacing: 0.05em;
 }
 
 .wave-price {
-  font-size: var(--text-xl);
-  font-weight: var(--weight-black);
-  color: var(--color-electric-blue);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-primary);
   font-family: var(--font-mono);
 }
 
 .wave-date {
-  font-size: var(--text-base);
-  opacity: 0.7;
+  font-size: 0.8rem;
+  color: var(--color-grey-500);
 }
 
 .competition-actions {
-  display: flex;
-  gap: var(--space-4);
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 24px;
 }
 
 .competition-actions .btn {
-  flex: 1;
-  min-width: 140px;
+  width: 100%;
+  min-width: 0;
+  padding: 0 16px;
+  height: 44px;
+  font-size: 0.85rem;
 }
 
 @media (max-width: 768px) {

@@ -10,14 +10,12 @@
 
       <div class="objectives-grid">
         <div 
-          v-for="objective in objectives" 
+          v-for="(objective, index) in objectivesWithIcons" 
           :key="objective.id"
           class="objective-card card"
-          :style="{ borderTopColor: objective.color }"
         >
-          <div class="objective-icon" :style="{ backgroundColor: objective.color }">
-            {{ objective.icon }}
-          </div>
+          <div class="objective-icon" v-html="objective.icon"></div>
+          <div class="objective-number">{{ String(index + 1).padStart(2, '0') }}</div>
           <h3 class="objective-title">{{ objective.title }}</h3>
           <p class="objective-description">{{ objective.description }}</p>
         </div>
@@ -28,21 +26,39 @@
 
 <script setup>
 import { objectives } from '@/data/competitions';
+
+// Add IT-related icons to objectives
+const objectivesWithIcons = objectives.map((obj, index) => {
+  const icons = [
+    `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>`,
+    `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>`,
+    `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>`,
+    `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l-5.5 9h11z M12 22l5.5-9h-11z M12 2v20"/></svg>`
+  ];
+  return {
+    ...obj,
+    icon: icons[index] || icons[0]
+  };
+});
 </script>
 
 <style scoped>
 .objectives {
-  background: linear-gradient(135deg, #9D00FF 0%, #6B00B3 100%);
-  color: var(--color-pure-white);
+  position: relative;
 }
 
-.section-title {
-  color: var(--color-neon-yellow);
+.section-header {
+  text-align: center;
+  margin-bottom: 48px;
+  width: 100%;
 }
 
 .section-subtitle {
-  color: var(--color-pure-white);
-  opacity: 0.9;
+  color: var(--color-grey-400);
+  text-align: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .objectives-grid {
@@ -50,51 +66,61 @@ import { objectives } from '@/data/competitions';
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--space-8);
   max-width: 100%;
-  width: 100%;
 }
 
 .objective-card {
-  background: var(--color-pure-white);
-  color: var(--color-pure-black);
-  padding: var(--space-8);
+  padding: var(--space-10);
   text-align: center;
-  border-top: 8px solid;
-  transition: all var(--transition-base);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  gap: var(--space-4);
   min-height: 320px;
-}
-
-.objective-card:hover {
-  transform: translate(-6px, -6px);
-  box-shadow: 12px 12px 0px var(--color-pure-black);
+  position: relative;
 }
 
 .objective-icon {
-  width: 100px;
-  height: 100px;
-  margin: 0 auto var(--space-6);
+  width: 64px;
+  height: 64px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--text-6xl);
-  border: var(--border-width-medium) solid var(--color-pure-black);
-  box-shadow: var(--shadow-md);
+  background: var(--gradient-primary);
+  border-radius: var(--radius-lg);
+  color: var(--color-pure-white);
+  margin-bottom: var(--space-2);
+}
+
+.objective-icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.objective-number {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  font-size: var(--text-4xl);
+  font-weight: var(--weight-black);
+  color: rgba(0, 217, 255, 0.1);
+  font-family: var(--font-display);
+  line-height: 1;
 }
 
 .objective-title {
-  font-size: var(--text-2xl);
-  font-weight: var(--weight-black);
-  margin-bottom: var(--space-4);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  color: var(--color-pure-white);
   text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: var(--font-display);
 }
 
 .objective-description {
-  font-size: var(--text-lg);
-  line-height: 1.6;
-  opacity: 0.8;
+  font-size: var(--text-base);
+  line-height: 1.7;
+  color: var(--color-grey-400);
+  flex: 1;
 }
 
 @media (max-width: 768px) {

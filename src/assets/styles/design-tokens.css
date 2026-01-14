@@ -1,134 +1,130 @@
 /* ============================================================================
-   TECHTOPIA - Neo-Brutalist Design Tokens
+   TECHTOPIA - Futuristic Modern Design Tokens
+   Tech-Forward, Gradient Accents, High-Tech Aesthetic
    ============================================================================ */
 
 :root {
-  /* ===== Color System ===== */
-  /* Primary Colors - High Contrast */
-  --color-electric-blue: #0066FF;
-  --color-neon-yellow: #FFFF00;
+  /* ===== Color System - Futuristic ===== */
+  /* Base Colors */
   --color-pure-black: #000000;
+  --color-dark-bg: #0A0E27;
+  --color-darker-bg: #050814;
+  --color-card-bg: #0F1629;
+
+  /* Greys */
+  --color-grey-900: #1A1D2E;
+  --color-grey-800: #2D3142;
+  --color-grey-700: #4F5D75;
+  --color-grey-600: #6B7A8F;
+  --color-grey-500: #8B95A5;
+  --color-grey-400: #A8B2C1;
+  --color-grey-300: #C5CDD6;
+  --color-grey-200: #E1E5EB;
+  --color-grey-100: #F0F2F5;
+
   --color-pure-white: #FFFFFF;
-  --color-off-white: #F5F5F5;
-  
-  /* Accent Colors - Bold & Vibrant */
-  --color-hot-pink: #FF006E;
-  --color-lime-green: #00FF66;
-  --color-cyber-purple: #9D00FF;
-  --color-orange-burst: #FF6B00;
-  
-  /* Semantic Colors */
-  --color-success: #00FF66;
-  --color-warning: #FFFF00;
-  --color-danger: #FF006E;
-  --color-info: #0066FF;
-  
+
+  /* Futuristic Accent Colors - Gradients */
+  --color-primary: #00D9FF;
+  --color-primary-dark: #0099CC;
+  --color-secondary: #7B2FFF;
+  --color-secondary-dark: #5A1FCC;
+  --color-accent: #FF2E97;
+  --color-success: #00FF88;
+  --color-warning: #FFB800;
+
+  /* Gradient Definitions */
+  --gradient-primary: linear-gradient(135deg, #00D9FF 0%, #7B2FFF 100%);
+  --gradient-secondary: linear-gradient(135deg, #7B2FFF 0%, #FF2E97 100%);
+  --gradient-accent: linear-gradient(135deg, #FF2E97 0%, #FFB800 100%);
+  --gradient-tech: linear-gradient(135deg, #00FF88 0%, #00D9FF 100%);
+  --gradient-dark: linear-gradient(135deg, #0A0E27 0%, #1A1D2E 100%);
+
   /* Glassmorphism */
-  --glass-bg: rgba(255, 255, 255, 0.1);
-  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
   --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-  
-  /* ===== Typography ===== */
-  /* Font Families */
-  --font-primary: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-display: 'Space Grotesk', 'Inter', sans-serif;
+
+  /* Neon Glow Effects */
+  --glow-primary: 0 0 20px rgba(0, 217, 255, 0.5);
+  --glow-secondary: 0 0 20px rgba(123, 47, 255, 0.5);
+  --glow-accent: 0 0 20px rgba(255, 46, 151, 0.5);
+
+  /* ===== Typography - Modern Tech ===== */
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Orbitron', 'Rajdhani', sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
-  
-  /* Font Sizes - Bold Scale */
-  --text-xs: 0.75rem;      /* 12px */
-  --text-sm: 0.875rem;     /* 14px */
-  --text-base: 1rem;       /* 16px */
-  --text-lg: 1.125rem;     /* 18px */
-  --text-xl: 1.25rem;      /* 20px */
-  --text-2xl: 1.5rem;      /* 24px */
-  --text-3xl: 1.875rem;    /* 30px */
-  --text-4xl: 2.25rem;     /* 36px */
-  --text-5xl: 3rem;        /* 48px */
-  --text-6xl: 3.75rem;     /* 60px */
-  --text-7xl: 4.5rem;      /* 72px */
-  --text-8xl: 6rem;        /* 96px */
-  
+
+  /* Font Sizes */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-6xl: 3.75rem;
+  --text-7xl: 4.5rem;
+
   /* Font Weights */
+  --weight-light: 300;
   --weight-normal: 400;
   --weight-medium: 500;
   --weight-semibold: 600;
   --weight-bold: 700;
   --weight-black: 900;
-  
-  /* ===== Spacing System - Asymmetrical ===== */
-  --space-1: 0.25rem;   /* 4px */
-  --space-2: 0.5rem;    /* 8px */
-  --space-3: 0.75rem;   /* 12px */
-  --space-4: 1rem;      /* 16px */
-  --space-5: 1.25rem;   /* 20px */
-  --space-6: 1.5rem;    /* 24px */
-  --space-8: 2rem;      /* 32px */
-  --space-10: 2.5rem;   /* 40px */
-  --space-12: 3rem;     /* 48px */
-  --space-16: 4rem;     /* 64px */
-  --space-20: 5rem;     /* 80px */
-  --space-24: 6rem;     /* 96px */
-  --space-32: 8rem;     /* 128px */
-  
-  /* ===== Borders - Thick & Bold ===== */
-  --border-width-thin: 2px;
-  --border-width-medium: 4px;
-  --border-width-thick: 6px;
-  --border-width-ultra: 8px;
-  
-  --border-style: solid;
-  --border-color-dark: var(--color-pure-black);
-  --border-color-light: var(--color-pure-white);
-  
-  /* ===== Shadows - Hard & Offset ===== */
-  --shadow-sm: 4px 4px 0px var(--color-pure-black);
-  --shadow-md: 6px 6px 0px var(--color-pure-black);
-  --shadow-lg: 8px 8px 0px var(--color-pure-black);
-  --shadow-xl: 12px 12px 0px var(--color-pure-black);
-  --shadow-2xl: 16px 16px 0px var(--color-pure-black);
-  
-  /* Colored Shadows */
-  --shadow-blue: 8px 8px 0px var(--color-electric-blue);
-  --shadow-pink: 8px 8px 0px var(--color-hot-pink);
-  --shadow-yellow: 8px 8px 0px var(--color-neon-yellow);
-  --shadow-green: 8px 8px 0px var(--color-lime-green);
-  
-  /* ===== Border Radius - Minimal ===== */
-  --radius-none: 0;
+
+  /* ===== Spacing ===== */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  /* ===== Borders ===== */
+  --border-width-thin: 1px;
+  --border-width-medium: 2px;
+  --border-width-thick: 3px;
+
+  /* ===== Shadows - Futuristic ===== */
+  --shadow-sm: 0 2px 8px rgba(0, 217, 255, 0.1);
+  --shadow-md: 0 4px 16px rgba(0, 217, 255, 0.15);
+  --shadow-lg: 0 8px 24px rgba(0, 217, 255, 0.2);
+  --shadow-xl: 0 12px 32px rgba(0, 217, 255, 0.25);
+  --shadow-2xl: 0 20px 48px rgba(0, 217, 255, 0.3);
+
+  /* ===== Border Radius ===== */
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
   --radius-full: 9999px;
-  
-  /* ===== Z-Index Scale ===== */
+
+  /* ===== Z-Index ===== */
   --z-base: 0;
   --z-dropdown: 100;
   --z-sticky: 200;
   --z-fixed: 300;
   --z-modal-backdrop: 400;
   --z-modal: 500;
-  --z-popover: 600;
-  --z-tooltip: 700;
-  
+
   /* ===== Transitions ===== */
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-bounce: 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  
-  /* ===== Breakpoints (for reference in JS) ===== */
-  --breakpoint-sm: 640px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 1024px;
-  --breakpoint-xl: 1280px;
-  --breakpoint-2xl: 1536px;
-}
+  --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
 
-/* ===== Dark Mode Overrides ===== */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-off-white: #1A1A1A;
-    --glass-bg: rgba(0, 0, 0, 0.3);
-    --glass-border: rgba(255, 255, 255, 0.1);
-  }
+  /* ===== Animations ===== */
+  --animation-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animation-float: float 3s ease-in-out infinite;
+  --animation-glow: glow 2s ease-in-out infinite alternate;
 }

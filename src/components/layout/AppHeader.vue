@@ -48,7 +48,7 @@ const isScrolled = ref(false);
 const mobileMenuOpen = ref(false);
 
 const handleScroll = () => {
-  isScrolled.value = window.scrollY > 50;
+  isScrolled.value = window.scrollY > 20;
 };
 
 const toggleMobileMenu = () => {
@@ -60,7 +60,7 @@ const closeMobileMenu = () => {
 };
 
 const handleLogoError = (event) => {
-  event.target.src = 'https://placehold.co/200x50/0066FF/FFFFFF?text=TECHTOPIA';
+  event.target.src = 'https://placehold.co/200x50/000000/FFFFFF?text=TECHTOPIA';
 };
 
 onMounted(() => {
@@ -79,49 +79,57 @@ onUnmounted(() => {
   left: 0;
   width: 100%;
   z-index: var(--z-fixed);
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-bottom: var(--border-width-medium) solid var(--color-pure-black);
-  transition: all var(--transition-base);
+  background: rgba(10, 14, 39, 0.85); /* Solid dark glass for visibility */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+  height: 80px;
+  display: flex;
+  align-items: center;
 }
 
 .app-header.scrolled {
-  box-shadow: var(--shadow-md);
-  background: rgba(255, 255, 255, 0.98);
+  background: rgba(5, 8, 20, 0.95); /* Even darker on scroll */
+  border-bottom-color: rgba(0, 217, 255, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .nav-wrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--space-4) 0;
+  width: 100%;
 }
 
 .logo-img {
-  height: 50px;
+  height: 50px; /* Slightly larger logo */
   width: auto;
-  transition: all var(--transition-base);
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 0 8px rgba(0, 217, 255, 0.3)); /* Glow match theme */
 }
 
-.logo-img:hover {
+.logo:hover .logo-img {
   transform: scale(1.05);
+  filter: drop-shadow(0 0 12px rgba(0, 217, 255, 0.6));
 }
 
 .nav-list {
   display: flex;
   align-items: center;
-  gap: var(--space-6);
+  gap: 32px;
   list-style: none;
 }
 
 .nav-link {
-  font-size: var(--text-base);
-  font-weight: var(--weight-bold);
-  color: var(--color-pure-black);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-family: var(--font-primary);
+  font-size: 0.95rem; /* Better readability */
+  font-weight: 500;
+  color: var(--color-grey-300);
+  letter-spacing: 0.02em;
   position: relative;
-  transition: all var(--transition-fast);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
 }
 
 .nav-link::after {
@@ -130,82 +138,25 @@ onUnmounted(() => {
   bottom: -4px;
   left: 0;
   width: 0;
-  height: 3px;
-  background: var(--color-electric-blue);
-  transition: width var(--transition-fast);
+  height: 2px;
+  background: var(--color-primary);
+  box-shadow: 0 0 8px var(--color-primary);
+  transition: width 0.3s ease;
 }
 
 .nav-link:hover {
-  color: var(--color-electric-blue);
+  color: var(--color-pure-white);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
 }
 
 .nav-link:hover::after {
   width: 100%;
 }
 
-.hamburger {
-  display: none;
-  flex-direction: column;
-  gap: 6px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: var(--space-2);
-}
-
-.hamburger span {
-  width: 30px;
-  height: 3px;
-  background: var(--color-pure-black);
-  transition: all var(--transition-fast);
-}
-
-.hamburger.active span:nth-child(1) {
-  transform: rotate(45deg) translate(8px, 8px);
-}
-
-.hamburger.active span:nth-child(2) {
-  opacity: 0;
-}
-
-.hamburger.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(8px, -8px);
-}
-
 /* Mobile Styles */
 @media (max-width: 768px) {
-  .hamburger {
-    display: flex;
-  }
-
-  .nav-list {
-    position: fixed;
-    top: 80px;
-    right: -100%;
-    width: 80%;
-    max-width: 300px;
-    height: calc(100vh - 80px);
-    background: var(--color-pure-white);
-    border-left: var(--border-width-medium) solid var(--color-pure-black);
-    flex-direction: column;
-    align-items: flex-start;
-    padding: var(--space-8);
-    gap: var(--space-4);
-    transition: right var(--transition-base);
-    box-shadow: var(--shadow-lg);
-  }
-
-  .nav-list.active {
-    right: 0;
-  }
-
-  .nav-link {
-    width: 100%;
-    padding: var(--space-3) 0;
-  }
-
-  .nav-list .btn {
-    width: 100%;
+  .app-header {
+    height: 70px;
   }
 }
 </style>

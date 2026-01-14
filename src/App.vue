@@ -14,13 +14,7 @@
 
       <ObjectivesSection />
       
-      <!-- Interactive Timeline Feature -->
-      <InteractiveTimeline />
-      
       <CompetitionsSection />
-      
-      <!-- Live Leaderboard Feature -->
-      <LiveLeaderboard />
       
       <FAQSection />
     </main>
@@ -37,8 +31,6 @@ import ObjectivesSection from './components/sections/ObjectivesSection.vue';
 import CompetitionsSection from './components/sections/CompetitionsSection.vue';
 import FAQSection from './components/sections/FAQSection.vue';
 import SmartCountdown from './components/features/SmartCountdown.vue';
-import InteractiveTimeline from './components/features/InteractiveTimeline.vue';
-import LiveLeaderboard from './components/features/LiveLeaderboard.vue';
 </script>
 
 <style>
@@ -52,12 +44,13 @@ import LiveLeaderboard from './components/features/LiveLeaderboard.vue';
 
 main {
   flex: 1;
-  padding-top: 80px; /* Account for fixed header */
+  padding-top: 70px; /* Account for fixed header */
 }
 
 .countdown-section {
-  padding: var(--space-12) 0;
-  background: linear-gradient(135deg, #FF6B00 0%, #FF8C00 100%);
+  padding: var(--space-20) 0;
+  background: var(--color-off-white);
+  border-bottom: var(--border-width-thin) solid var(--color-light-grey);
 }
 
 /* Smooth scroll offset for fixed header */

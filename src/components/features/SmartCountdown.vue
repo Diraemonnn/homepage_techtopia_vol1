@@ -1,158 +1,106 @@
 <template>
-  <div class="smart-countdown">
-    <div class="countdown-card glass-strong" :style="{ borderColor: urgencyColor }">
-      <!-- Header -->
+  <div class="countdown-wrapper">
+    <div class="countdown-card">
       <div class="countdown-header">
-        <div class="countdown-icon">⏰</div>
-        <div class="countdown-title">
-          <h3>Pendaftaran Ditutup Dalam</h3>
-          <p class="countdown-subtitle">{{ urgencyMessage }}</p>
-        </div>
+        <h3>Pendaftaran Ditutup Dalam</h3>
+        <p class="countdown-deadline">{{ formatDeadline(targetDate) }}</p>
       </div>
 
-      <!-- Countdown Display -->
       <div class="countdown-display">
-        <div class="countdown-unit" :class="{ 'pulse': urgencyLevel === 'critical' }">
-          <div class="countdown-number" :style="{ backgroundColor: urgencyColor }">
-            {{ formatNumber(timeRemaining.days) }}
-          </div>
+        <div class="countdown-unit">
+          <div class="countdown-number">{{ days }}</div>
           <div class="countdown-label">Hari</div>
         </div>
-
         <div class="countdown-separator">:</div>
-
-        <div class="countdown-unit" :class="{ 'pulse': urgencyLevel === 'critical' }">
-          <div class="countdown-number" :style="{ backgroundColor: urgencyColor }">
-            {{ formatNumber(timeRemaining.hours) }}
-          </div>
+        <div class="countdown-unit">
+          <div class="countdown-number">{{ hours }}</div>
           <div class="countdown-label">Jam</div>
         </div>
-
         <div class="countdown-separator">:</div>
-
-        <div class="countdown-unit" :class="{ 'pulse': urgencyLevel === 'critical' }">
-          <div class="countdown-number" :style="{ backgroundColor: urgencyColor }">
-            {{ formatNumber(timeRemaining.minutes) }}
-          </div>
+        <div class="countdown-unit">
+          <div class="countdown-number">{{ minutes }}</div>
           <div class="countdown-label">Menit</div>
         </div>
-
         <div class="countdown-separator">:</div>
-
-        <div class="countdown-unit" :class="{ 'pulse': urgencyLevel === 'critical' }">
-          <div class="countdown-number" :style="{ backgroundColor: urgencyColor }">
-            {{ formatNumber(timeRemaining.seconds) }}
-          </div>
+        <div class="countdown-unit">
+          <div class="countdown-number">{{ seconds }}</div>
           <div class="countdown-label">Detik</div>
         </div>
       </div>
 
-      <!-- Urgency Bar -->
-      <div class="urgency-bar">
-        <div 
-          class="urgency-fill" 
-          :style="{ 
-            width: urgencyPercentage + '%',
-            backgroundColor: urgencyColor 
-          }"
-        ></div>
-      </div>
-
-      <!-- CTA Button -->
-      <div class="countdown-cta">
-        <a href="#daftar-lomba" class="btn btn-primary btn-large">
-          🚀 Daftar Sekarang
-        </a>
+      <div class="countdown-message">
+        <p>{{ urgencyMessage }}</p>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue';
 import { useCountdown } from '@/composables/useCountdown';
 
-// Target date: End of wave 2 registration (August 30, 2025)
-const targetDate = '2025-08-30T23:59:59';
+const targetDate = new Date('2025-08-30T23:59:59');
+const { days, hours, minutes, seconds, urgencyMessage } = useCountdown(targetDate);
 
-const {
-  timeRemaining,
-  urgencyLevel,
-  urgencyColor,
-  urgencyMessage,
-  formatNumber
-} = useCountdown(targetDate);
-
-// Calculate urgency percentage for visual bar
-const urgencyPercentage = computed(() => {
-  const totalDays = 40; // Total registration period (approx)
-  const remainingDays = timeRemaining.value.days;
-  return Math.max(0, Math.min(100, ((totalDays - remainingDays) / totalDays) * 100));
-});
+const formatDeadline = (date) => {
+  return date.toLocaleDateString('id-ID', { 
+    day: 'numeric', 
+    month: 'long', 
+    year: 'numeric' 
+  });
+};
 </script>
 
 <style scoped>
-.smart-countdown {
-  width: 100%;
+/* Futuristic Checkout Style */
+.countdown-wrapper {
   max-width: 900px;
   margin: 0 auto;
 }
 
 .countdown-card {
-  padding: var(--space-6);
-  border: var(--border-width-thick) solid var(--color-pure-black);
-  transition: all var(--transition-base);
-  position: relative;
-  overflow: hidden;
+  padding: 48px;
+  border-radius: 24px;
+  background: rgba(10, 14, 30, 0.4); /* Very subtle dark glass */
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 217, 255, 0.1);
+  box-shadow: 0 0 40px rgba(0, 217, 255, 0.05); /* Subtle glow */
+  transition: all 0.3s ease;
+  text-align: center;
 }
 
-.countdown-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 8px;
-  background: linear-gradient(90deg, 
-    var(--color-electric-blue), 
-    var(--color-hot-pink), 
-    var(--color-neon-yellow)
-  );
+.countdown-card:hover {
+  border-color: rgba(0, 217, 255, 0.3);
+  box-shadow: 0 0 60px rgba(0, 217, 255, 0.1);
 }
 
 .countdown-header {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  margin-bottom: var(--space-6);
+  margin-bottom: 40px;
 }
 
-.countdown-icon {
-  font-size: var(--text-4xl);
-  animation: float 3s ease-in-out infinite;
-}
-
-.countdown-title h3 {
-  font-size: clamp(var(--text-xl), 3.5vw, var(--text-3xl));
-  font-weight: var(--weight-black);
-  color: var(--color-pure-black);
-  margin-bottom: var(--space-2);
+.countdown-header h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: var(--color-pure-white);
+  margin-bottom: 8px;
   text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
 }
 
-.countdown-subtitle {
-  font-size: var(--text-lg);
-  font-weight: var(--weight-semibold);
-  color: var(--color-pure-black);
-  opacity: 0.8;
+.countdown-deadline {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--color-primary);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .countdown-display {
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: var(--space-3);
-  margin-bottom: var(--space-6);
+  gap: 32px;
+  margin-bottom: 40px;
   flex-wrap: wrap;
 }
 
@@ -160,104 +108,65 @@ const urgencyPercentage = computed(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-2);
-}
-
-.countdown-unit.pulse .countdown-number {
-  animation: pulse 1s ease-in-out infinite;
+  gap: 12px;
 }
 
 .countdown-number {
-  width: 80px;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--text-4xl);
-  font-weight: var(--weight-black);
+  font-family: var(--font-display); /* Use display font for numbers */
+  font-size: 4rem;
+  line-height: 1;
+  font-weight: 700;
   color: var(--color-pure-white);
-  border: var(--border-width-medium) solid var(--color-pure-black);
-  box-shadow: var(--shadow-md);
-  transition: all var(--transition-base);
-  font-family: var(--font-mono);
-}
-
-.countdown-separator {
-  font-size: var(--text-4xl);
-  font-weight: var(--weight-black);
-  color: var(--color-pure-black);
-  margin: 0 var(--space-1);
+  text-shadow: 
+    0 0 10px rgba(0, 217, 255, 0.5),
+    0 0 20px rgba(0, 217, 255, 0.3);
+  min-width: 80px;
 }
 
 .countdown-label {
-  font-size: var(--text-base);
-  font-weight: var(--weight-bold);
-  color: var(--color-pure-black);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-grey-400);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.2em;
 }
 
-.urgency-bar {
-  width: 100%;
-  height: 10px;
-  background: rgba(0, 0, 0, 0.1);
-  border: var(--border-width-thin) solid var(--color-pure-black);
-  margin-bottom: var(--space-6);
-  overflow: hidden;
+.countdown-separator {
+  font-size: 3rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.1);
+  margin-top: -10px; /* Adjust vertical align */
 }
 
-.urgency-fill {
-  height: 100%;
-  transition: width 1s ease-out, background-color var(--transition-base);
+.countdown-message {
+  display: inline-block;
+  padding: 12px 32px;
+  background: rgba(0, 217, 255, 0.1);
+  border: 1px solid rgba(0, 217, 255, 0.2);
+  border-radius: 50px;
+  font-size: 0.95rem;
+  color: var(--color-pure-white);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  animation: pulse 2s infinite;
 }
 
-.countdown-cta {
-  text-align: center;
-}
-
-/* Responsive */
 @media (max-width: 768px) {
-  .countdown-card {
-    padding: var(--space-6);
+  .countdown-display {
+    gap: 16px;
   }
-
+  
   .countdown-number {
-    width: 70px;
-    height: 70px;
-    font-size: var(--text-3xl);
+    font-size: 2.5rem;
+    min-width: 50px;
   }
-
+  
   .countdown-separator {
-    font-size: var(--text-3xl);
-    margin: 0 var(--space-1);
+    display: none; /* Hide separators on mobile for cleaner look */
   }
-
-  .countdown-label {
-    font-size: var(--text-sm);
-  }
-
-  .countdown-icon {
-    font-size: var(--text-4xl);
-  }
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.05);
-    opacity: 0.8;
+  
+  .countdown-card {
+    padding: 32px 20px;
   }
 }
 </style>
