@@ -278,10 +278,33 @@ const competitionsWithIcons = competitions.map((comp) => {
 @media (max-width: 768px) {
   .competitions-grid {
     grid-template-columns: 1fr;
+    /* On mobile, use standard vertical flow or keep horizontal based on preference. 
+       If keeping horizontal, let's adjust card width */
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 24px;
+    gap: 16px;
+  }
+
+  .competition-card {
+    min-width: 280px; /* Smaller width for mobile */
+    max-width: 85vw; /* Responsive max width */
+    min-height: auto; /* Allow height to adjust */
+  }
+
+  /* Adjust internal spacing for mobile */
+  .competition-header,
+  .competition-body {
+    padding: 20px;
+  }
+
+  .competition-title {
+    font-size: 1.25rem;
   }
 
   .competition-actions {
     flex-direction: column;
+    gap: 12px;
   }
 
   .competition-actions .btn {

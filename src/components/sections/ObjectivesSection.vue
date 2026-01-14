@@ -126,6 +126,27 @@ const objectivesWithIcons = objectives.map((obj, index) => {
 @media (max-width: 768px) {
   .objectives-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .objective-card {
+    min-height: auto;
+    padding: 24px 20px;
+    gap: 16px;
+  }
+
+  .objective-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .objective-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .objective-title {
+    font-size: 1.1rem;
   }
 }
 </style>
